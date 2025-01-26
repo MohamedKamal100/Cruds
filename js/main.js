@@ -108,7 +108,7 @@ function displayData() {
   // ?===for Add deleteAllBtn ======
   let deleteAllBtn = document.getElementById('deleteAll')
   if (dataProduct.length > 0) {
-    deleteAllBtn.innerHTML = `<button onclick='deleteAll()'  id="deleteAll">Delete All</button>`
+    deleteAllBtn.innerHTML = `<button onclick='deleteAll()'  id="deleteAll">Delete All (${dataProduct.length} )</button>`
   } else {
     deleteAllBtn.innerHTML = ``
 
