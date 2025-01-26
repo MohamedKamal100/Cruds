@@ -14,7 +14,7 @@ body {
 }
 /* ?========head======= */
 .head {
-  margin: 2px 0;
+  margin: 20px 0;
   text-align: center;
   font-weight: 800;
 }
@@ -69,6 +69,9 @@ button:hover {
 }
 .btnSearch button {
   width: 45%;
+}
+#deleteAll {
+  margin: 20px 0;
 }
 table {
   width: 100%;

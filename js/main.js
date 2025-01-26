@@ -97,10 +97,25 @@ function displayData() {
   
   `
   }
+  // ?===for Add deleteAllBtn ======
+  let deleteAllBtn = document.getElementById('deleteAll')
+  if (dataProduct.length > 0) {
+    deleteAllBtn.innerHTML = `<button onclick='deleteAll()'  id="deleteAll">Delete All</button>`
+  } else {
+    deleteAllBtn.innerHTML = ``
+
+  }
+  //for display the products in html 
   document.getElementById('tbody').innerHTML = cartona;
 
 }
-displayData()
+// ?=================Delete All=========================
+
+function deleteAll() {
+  localStorage.clear();      //remove all product from local storage 
+  dataProduct.splice(0);     //remove from index 0 to the end
+  displayData()
+}
 
 // ?=============Delete data========================
 function deleteData(i) {
@@ -109,3 +124,17 @@ function deleteData(i) {
   displayData()
 }
 // ?==============================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+displayData()
