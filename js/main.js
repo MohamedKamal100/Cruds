@@ -57,24 +57,29 @@ submit.onclick = function () {
 
   }
   // Create producs with numbers of count 
-  if (mood === 'create') {
-    if (newProduct.count > 1) {
-      for (let i = 0; i < newProduct.count; i++) {
+  if (title.value != '' && price.value != '' && category.value != '' && count.value <= 100) {
+    if (mood === 'create') {
+      if (newProduct.count > 1) {
+        for (let i = 0; i < newProduct.count; i++) {
+          dataProduct.push(newProduct)
+        }
+      } else {
         dataProduct.push(newProduct)
       }
-    } else {
-      dataProduct.push(newProduct)
     }
+    else {
+      dataProduct[tmp] = newProduct;
+      mood = 'create';
+      submit.innerHTML = 'create'
+      count.style.display = 'block'
+
+    }
+    clearData()
   }
-  else {
-    dataProduct[tmp] = newProduct;
-    mood = 'create';
-    submit.innerHTML = 'create'
-    count.style.display = 'block'
-  }
-  // ==========================
+
+  // ===========Save local storage ===============
   localStorage.setItem('product', JSON.stringify(dataProduct))
-  clearData()
+
   displayData()
   console.log(dataProduct)
 }
@@ -97,7 +102,7 @@ function displayData() {
   for (let i = 0; i < dataProduct.length; i++) {
     cartona += `
    <tr>
-              <td>${i}</td>
+              <td>${i + 1}</td>
               <td>${dataProduct[i].title}</td>
               <td>${dataProduct[i].price}</td>
               <td>${dataProduct[i].taxes}</td>
@@ -235,7 +240,11 @@ function searchData(value) {
   }
   document.getElementById('tbody').innerHTML = cartona;
 }
-// ?==============================================================
+
+
+
+
+
 
 
 
