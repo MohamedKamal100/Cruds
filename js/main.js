@@ -46,14 +46,14 @@ else {
 
 submit.onclick = function () {
   let newProduct = {
-    title: title.value,
+    title: title.value.toLowerCase(),
     price: price.value,
     taxes: taxes.value,
     ads: ads.value,
     discount: discount.value,
     total: total.innerHTML,
     count: count.value,
-    category: category.value,
+    category: category.value.toLowerCase()
 
   }
   // Create producs with numbers of count 
@@ -158,6 +158,84 @@ function updateData(i) {
 
 }
 
+
+// ?=====================Search==========================
+
+let searchMood = 'title';  //Default 
+let search = document.getElementById('search')
+let searchTitle = document.getElementById('searchTitle')
+let searchCategory = document.getElementById('searchCategory')
+
+searchTitle.addEventListener('click', function () {
+  getSearchMood(this.id)
+})
+searchCategory.addEventListener('click', function () {
+  getSearchMood(this.id)
+})
+
+function getSearchMood(id) {
+
+  if (id == 'searchTitle') {
+    searchMood = 'title'
+  } else {
+    searchMood = 'category'
+  }
+  search.placeholder = 'Search By ' + searchMood;
+  search.focus()
+  search.value = ''
+  displayData()
+
+}
+
+function searchData(value) {
+  let cartona = '';
+  for (let i = 0; i < dataProduct.length; i++) {
+    if (searchMood == 'title') {
+
+
+      if (dataProduct[i].title.includes(value.toLowerCase())) {
+        cartona += `
+   <tr>
+              <td>${i}</td>
+              <td>${dataProduct[i].title}</td>
+              <td>${dataProduct[i].price}</td>
+              <td>${dataProduct[i].taxes}</td>
+              <td>${dataProduct[i].ads}</td>
+              <td>${dataProduct[i].discount}</td>
+              <td>${dataProduct[i].total}</td>
+              <td>${dataProduct[i].category}</td>
+              <td><button onclick="updateData(${i})" id="update">Update</button></td>
+              <td><button onclick='deleteData(${i})' id="delete">delete</button></td>
+   </tr>
+             `
+
+      }
+    }
+    else {
+
+      if (dataProduct[i].category.includes(value.toLowerCase())) {
+        cartona += `
+   <tr>
+              <td>${i}</td>
+              <td>${dataProduct[i].title}</td>
+              <td>${dataProduct[i].price}</td>
+              <td>${dataProduct[i].taxes}</td>
+              <td>${dataProduct[i].ads}</td>
+              <td>${dataProduct[i].discount}</td>
+              <td>${dataProduct[i].total}</td>
+              <td>${dataProduct[i].category}</td>
+              <td><button onclick="updateData(${i})" id="update">Update</button></td>
+              <td><button onclick='deleteData(${i})' id="delete">delete</button></td>
+            </tr>
+             `
+
+      }
+
+    }
+  }
+  document.getElementById('tbody').innerHTML = cartona;
+}
+// ?==============================================================
 
 
 

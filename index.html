@@ -38,7 +38,13 @@
 
       <div class="output">
         <div class="searchBlock">
-          <input type="text" name="search" id="search" placeholder="Search" />
+          <input
+            type="text"
+            name="search"
+            onkeyup="searchData(this.value)"
+            id="search"
+            placeholder="Search"
+          />
           <div class="btnSearch">
             <button id="searchTitle">Search By Title</button>
             <button id="searchCategory">Search By Category</button>
