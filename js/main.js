@@ -8,7 +8,8 @@ let count = document.getElementById("count")
 let category = document.getElementById("category")
 let submit = document.getElementById("submit")
 
-
+let mood = 'create'    // default mood we use it>>> because we need another mood in case of update function .... 
+let tmp;
 //? ==========GetTotal===========
 function getTotal() {
   if (price.value != '') {
@@ -56,12 +57,20 @@ submit.onclick = function () {
 
   }
   // Create producs with numbers of count 
-  if (newProduct.count > 1) {
-    for (let i = 0; i < newProduct.count; i++) {
+  if (mood === 'create') {
+    if (newProduct.count > 1) {
+      for (let i = 0; i < newProduct.count; i++) {
+        dataProduct.push(newProduct)
+      }
+    } else {
       dataProduct.push(newProduct)
     }
-  } else {
-    dataProduct.push(newProduct)
+  }
+  else {
+    dataProduct[tmp] = newProduct;
+    mood = 'create';
+    submit.innerHTML = 'create'
+    count.style.display = 'block'
   }
   // ==========================
   localStorage.setItem('product', JSON.stringify(dataProduct))
@@ -82,9 +91,6 @@ function clearData() {
   category.value = '';
 }
 
-
-
-
 // ?================Read=============================
 function displayData() {
   let cartona = '';
@@ -99,7 +105,7 @@ function displayData() {
               <td>${dataProduct[i].discount}</td>
               <td>${dataProduct[i].total}</td>
               <td>${dataProduct[i].category}</td>
-              <td><button id="update">Update</button></td>
+              <td><button onclick="updateData(${i})" id="update">Update</button></td>
               <td><button onclick='deleteData(${i})' id="delete">delete</button></td>
             </tr>
   
@@ -115,7 +121,7 @@ function displayData() {
   }
   //for display the products in html 
   document.getElementById('tbody').innerHTML = cartona;
-
+  getTotal()
 }
 // ?=================Delete All=========================
 
@@ -131,16 +137,26 @@ function deleteData(i) {
   localStorage.product = JSON.stringify(dataProduct);
   displayData()
 }
-// ?==============================================
+// ?=====================Update=========================
 
+function updateData(i) {
+  title.value = dataProduct[i].title;
+  price.value = dataProduct[i].price;
+  taxes.value = dataProduct[i].taxes;
+  ads.value = dataProduct[i].ads;
+  discount.value = dataProduct[i].discount;
+  category.value = dataProduct[i].category;
+  count.style.display = 'none'
+  getTotal()
+  submit.innerHTML = 'Update'
+  mood = 'update'
+  tmp = i;
+  scroll({
+    top: 0,
+    behavior: 'smooth'
+  })                   //to make i visible for me outside function
 
-
-
-
-
-
-
-
+}
 
 
 
