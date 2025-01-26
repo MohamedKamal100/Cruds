@@ -55,7 +55,15 @@ submit.onclick = function () {
     category: category.value,
 
   }
-  dataProduct.push(newProduct)
+  // Create producs with numbers of count 
+  if (newProduct.count > 1) {
+    for (let i = 0; i < newProduct.count; i++) {
+      dataProduct.push(newProduct)
+    }
+  } else {
+    dataProduct.push(newProduct)
+  }
+  // ==========================
   localStorage.setItem('product', JSON.stringify(dataProduct))
   clearData()
   displayData()
